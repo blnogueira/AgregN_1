@@ -30,7 +30,7 @@ from dash import Dash, dcc, html, dash_table
 
 
 
-######################################## functions ######################################## 
+######################################## functions ########################################
 
 def to_clickable_html(df, file_path, header):
     html_df = dfnoticias.copy()
