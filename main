@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Jul  6 15:22:31 2023
-
-@author: bianogueira
-"""
 
 from bs4 import BeautifulSoup as bs
 import time
@@ -333,11 +328,6 @@ def scrape_metropoles(driver, url, palavras_chave, agora):
     for i in range(len(noticiasel)):
         if (noticiasel[i].text != '  ' and any(palavra.lower() in noticiasel[i].text for palavra in palavras_chave)):
             
-            htmlantigo = bs(open('/Users/bianogueira/Documents/Documentos - MacBook Air de Beatriz/RIO/academico/puc rio economia/ARX/webscraping/newsscraping/index.html','r'), 'html.parser')
-            link = noticiasel[i].find_all('h5', attrs = {"class":"noticia__titulo"})[0].find_all('a')[0].get('href')
-            
-            if link in str(htmlantigo):
-                continue
             
             dicNoticia = dict()
             dicNoticia['Data'] =  agora.strftime("%d/%m/%Y")
@@ -725,10 +715,6 @@ def scrape_dtransporte(driver, url, palavras_chave, agora):
 
 
 ########################################### setting ########################################## 
-#Johann:
-#file_path = 'C:/Users/Johann/OneDrive/Área de Trabalho/Agreg_News/index.html'  
-#Bia:
-file_path = '/Users/bianogueira/Documents/Documentos - MacBook Air de Beatriz/RIO/academico/puc rio economia/ARX/webscraping/newsscraping/index.html'  # Replace with the path to your HTML file
 palavras_chave = ['Preços', 'Preço', 'Tarifas', 'Tarifa', 'Gasolina', 'GLP', 'Botijão', 'Petrobras', ' PPI ', 'paridade', 'Reajuste', 'Brent', 'Cotação Safra', ' IPI ', 'ICMS', ' PIS ', 'Cofins', 'Impostos', 'Imposto', 'Reforma', 'Reformas', 'Governo', 'Congresso', 'Câmara', 'Senado', 'Deputados', 'Governador', ' PEC ', 'Centrão', 'Fiscal', 'Superávit', 'Déficit', 'Dívida', 'Arrecadação', ' Lira ', 'Pacheco', ' Lula ', 'Haddad', 'Fazenda', 'Ministério', 'STF', 'Judiciário', 'Banco Central', 'Autonomia', 'Taxa de juros', 'Juros', 'Política Monetária', 'Copom', 'Campos Neto', 'Galípolo', 'Ceron', 'Guilherme Mello', 'BNDES', 'TJLP', 'Mercadante', 'Nelson Barbosa', 'Inflação']
 dicsiteandfunction = {
     'Valor':[scrape_valor,'https://valor.globo.com/ultimas-noticias/'],
@@ -788,7 +774,7 @@ while True:
         agora = datetime.datetime.today()
         horariolimite = (agora - datetime.timedelta(minutes = 30)) .strftime("%H:%M")
         datalimite = agora.strftime("%d/%m/%Y")
-        header = '\n<html>\n<head>\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<style>\ntable {  border-collapse: collapse;  border-spacing: 0;  width: 100%;  border: 1px solid #ddd;}\nth, td {  text-align: left;  padding: 16px;}\ntr:nth-child(even) {  background-color: #f2f2f2;}\n</style>\n</head>\n<body>\n\n<h2>Agregador de Notícias - ARX Macro</h2>\n<p> Última Atualização: '+agora.strftime("%H:%M")+'</p>'
+        header = '\n<html>\n<head>\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<style>\ntable {  border-collapse: collapse;  border-spacing: 0;  width: 100%;  border: 1px solid #ddd;}\nth, td {  text-align: left;  padding: 16px;}\ntr:nth-child(even) {  background-color: #f2f2f2;}\n</style>\n</head>\n<body>\n\n<h2>Agregador de Notícias</h2>\n<p> Última Atualização: '+agora.strftime("%H:%M")+'</p>'
 
         #iniciar o browser
         options = Options()
@@ -844,11 +830,7 @@ while True:
 
         display(html)
 
-        
-        #to_clickable_html(dfnoticias.sort_values('Hora', ascending = False, inplace = True), file_path, header)
-        
-        #webbrowser.open('file://'+ file_path, autoraise= False )
-        
+
 
         end = time.time()
         print((end-start)/60)
